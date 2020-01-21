@@ -21,7 +21,12 @@ class AuthApiController extends Controller
 
         $token = auth('api')->login($user);
 
-        return $this->respondWithToken($request, $token);
+        return $this->respondWithToken(
+            $request,
+            $token,
+            'Thank you for registering',
+            Message::MESSAGE_SUCCESS
+        );
     }
 
     public function postLogin(Request $request): JsonResponse

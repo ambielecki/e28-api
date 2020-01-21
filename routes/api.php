@@ -4,17 +4,6 @@ use App\Library\JsonResponseData;
 use App\Library\Message;
 use Illuminate\Http\Request;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::post('/register', 'AuthApiController@postRegister');
 Route::post('/login', 'AuthApiController@postLogin');
 Route::post('/logout', 'AuthApiController@postLogout');

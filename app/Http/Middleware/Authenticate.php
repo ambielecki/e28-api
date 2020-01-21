@@ -33,7 +33,7 @@ class Authenticate extends Middleware
         }
 
         throw new AuthenticationException(
-            'You must be logged in to view this page', $guards, $this->redirectTo($request)
+            'Unauthenticated.', $guards, $this->redirectTo($request)
         );
     }
 }
