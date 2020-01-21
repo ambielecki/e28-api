@@ -20,7 +20,7 @@ class HealthCheckApiController extends Controller
             $db_check->api_checks++;
 
             if ($db_check->save()) {
-                $message = 'E28 API Is Up and Running';
+                $message = config('app.name') . ' Is Up and Running';
                 $message_type = Message::MESSAGE_OK;
             } else {
                 $message = 'Problem Saving to DB';
