@@ -14,6 +14,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['prefix' => '/user'], function () {
             Route::get('/', 'UserAdminController@getList')->name('user_list');
             Route::get('/{user_id}', 'UserAdminController@getEdit')->name('user_edit');
+            Route::post('/{user_id}', 'UserAdminController@postEdit');
         });
     });
 });

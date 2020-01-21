@@ -24,4 +24,24 @@ class UserAdminController extends Controller
             'users' => $users,
         ]);
     }
+
+    public function getEdit($user_id): View {
+        $user = User::find($user_id);
+
+        return view('admin.users.edit', [
+            'user' => $user
+        ]);
+    }
+
+    public function postEdit(Request $request, $user_id) {
+        // TODO::Implement with validation
+
+        $user = User::find($user_id);
+
+        if ($user && $user->save()) {
+            return redirect()->route('user_list');
+        }
+
+        return back()->withInput();
+    }
 }
