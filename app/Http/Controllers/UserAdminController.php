@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -33,12 +34,14 @@ class UserAdminController extends Controller
         ]);
     }
 
-    public function postEdit(Request $request, $user_id) {
-        // TODO::Implement with validation
-
+    public function postEdit(UserRequest $request, $user_id) {
         $user = User::find($user_id);
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->is_admin = $request->input('is_admin') ? 1 : 0;
 
-        if ($user && $user->save()) {
+        if ($user->save()) {
             return redirect()->route('user_list');
         }
 

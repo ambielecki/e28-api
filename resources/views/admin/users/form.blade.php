@@ -3,7 +3,7 @@
     <div class="col-md-8">
         <input class="form-control" id="first_name" name="first_name" type="text" value="{{ old('first_name', $user->first_name) }}">
         @error('first_name')
-            <span class="invalid-feedback" role="alert">
+            <span class="text-danger">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -15,9 +15,9 @@
     <div class="col-md-8">
         <input class="form-control" id="last_name" name="last_name" type="text" value="{{ old('last_name', $user->last_name) }}">
         @error('last_name')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
+            <span class="text-danger">
+                <strong>{{ $message }}</strong>
+            </span>
         @enderror
     </div>
 </div>
@@ -27,9 +27,9 @@
     <div class="col-md-8">
         <input class="form-control" id="email" name="email" type="text" value="{{ old('email', $user->email) }}">
         @error('email')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
+            <span class="text-danger">
+                <strong>{{ $message }}</strong>
+            </span>
         @enderror
     </div>
 </div>
