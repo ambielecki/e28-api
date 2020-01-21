@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Library\JsonResponseData;
+use App\Library\Message;
 use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -30,14 +31,13 @@ class AuthApiController extends Controller
         if (!$token = auth('api')->attempt($credentials)) {
             return response()->json(JsonResponseData::formatData(
                 $request,
-                'Unauthorized',
-                [
-                    'error' => 'Unauthorized',
-                ],
+                'User/password not found, please try again',
+                Message::MESSAGE_ERROR,
+                [],
             ), 401);
         }
 
-        return $this->respondWithToken($request, $token);
+        return $this->respondWithToken($request, $token, 'Successfully Logged In', Message::MESSAGE_SUCCESS);
     }
 
     public function postLogout(Request $request): JsonResponse
@@ -47,6 +47,7 @@ class AuthApiController extends Controller
         return response()->json(JsonResponseData::formatData(
             $request,
             'Successfully logged out',
+            Message::MESSAGE_SUCCESS,
             [],
         ));
     }
@@ -61,15 +62,17 @@ class AuthApiController extends Controller
         return response()->json(JsonResponseData::formatData(
             $request,
             'You Must Be Logged In to View this Page',
+            Message::MESSAGE_ERROR,
             [],
         ), 401);
     }
 
-    protected function respondWithToken(Request $request, $token): JsonResponse
+    protected function respondWithToken(Request $request, $token, $message = 'Success', $message_type = Message::MESSAGE_OK): JsonResponse
     {
         return response()->json(JsonResponseData::formatData(
             $request,
-            'Success',
+            $message,
+            $message_type,
             [
                 'access_token' => $token,
                 'token_type' => 'bearer',
