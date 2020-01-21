@@ -15,19 +15,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('test', function (Request $request) {
-    return response()->json(JsonResponseData::formatData($request, 'Hello World', []));
-});
-
 Route::post('/register', 'AuthApiController@postRegister');
 Route::post('/login', 'AuthApiController@postLogin');
 Route::post('/logout', 'AuthApiController@postLogout');
 
-Route::get('/test', 'TestApiController@getTest');
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::get('/user', function(Request $request) {
+        return $request->user();
+    });
+});
 
 Route::fallback(function (Request $request) {
     return response()->json(JsonResponseData::formatData(

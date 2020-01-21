@@ -6,7 +6,7 @@ use App\Library\JsonResponseData;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class TestApiController extends Controller
+class TestController extends Controller
 {
     public function getTest(Request $request): JsonResponse {
 
