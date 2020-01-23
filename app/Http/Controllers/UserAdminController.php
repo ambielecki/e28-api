@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\User;
+use Hash;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -34,7 +36,7 @@ class UserAdminController extends Controller
         ]);
     }
 
-    public function postEdit(UserRequest $request, $user_id) {
+    public function postEdit(UserRequest $request, $user_id): RedirectResponse {
         $user = User::find($user_id);
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
@@ -46,5 +48,30 @@ class UserAdminController extends Controller
         }
 
         return back()->withInput();
+    }
+
+    public function getPassword(): View {
+        return view('admin.users.password');
+    }
+
+    public function postPassword(Request $request): RedirectResponse {
+        $request->validate([
+            'new_password' => 'required|string|min:8|confirmed'
+        ]);
+
+        $user = \Auth::user();
+
+        if ($user && Hash::check($request->input('current_password'), $user->password)) {
+            $user->password = Hash::make($request->input('new_password'));
+            if ($user->save()) {
+                return redirect()->route('home');
+            }
+        } else {
+            return back()->withErrors([
+                'current_password' => 'Current Password is Incorrect'
+            ]);
+        }
+
+        return back();
     }
 }
