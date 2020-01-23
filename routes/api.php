@@ -4,11 +4,11 @@ use App\Library\JsonResponseData;
 use App\Library\Message;
 use Illuminate\Http\Request;
 
-Route::get('/health-check', 'HealthCheckApiController@getHealthCheck');
+Route::get('/health-check', 'ApiHealthCheckController@getHealthCheck');
 
-Route::post('/register', 'AuthApiController@postRegister');
-Route::post('/login', 'AuthApiController@postLogin');
-Route::post('/logout', 'AuthApiController@postLogout');
+Route::post('/register', 'ApiAuthController@postRegister');
+Route::post('/login', 'ApiAuthController@postLogin');
+Route::post('/logout', 'ApiAuthController@postLogout');
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/user', function(Request $request) {

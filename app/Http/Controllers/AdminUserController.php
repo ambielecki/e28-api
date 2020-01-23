@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class UserAdminController extends Controller
+class AdminUserController extends Controller
 {
     public function getList(Request $request): View {
         $query = User::query();

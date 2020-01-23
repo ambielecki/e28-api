@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class AuthApiController extends Controller
+class ApiAuthController extends Controller
 {
     public function postRegister(Request $request): JsonResponse
     {

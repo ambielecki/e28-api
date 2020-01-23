@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Log;
 
-class HealthCheckApiController extends Controller
+class ApiHealthCheckController extends Controller
 {
     public function getHealthCheck(Request $request): JsonResponse {
         $message_type = Message::MESSAGE_ERROR;
