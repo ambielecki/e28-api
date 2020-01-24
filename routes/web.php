@@ -10,6 +10,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('test', 'TestController@getTest');
+        Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
         Route::group(['prefix' => '/user'], function () {
             Route::get('/', 'AdminUserController@getList')->name('user_list');

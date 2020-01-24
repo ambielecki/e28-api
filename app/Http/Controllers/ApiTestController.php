@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Log;
 
-class ApiHealthCheckController extends Controller
+class ApiTestController extends Controller
 {
     public function getHealthCheck(Request $request): JsonResponse {
         $message_type = Message::MESSAGE_ERROR;
@@ -47,6 +47,15 @@ class ApiHealthCheckController extends Controller
             [
                 'api_checks' => $db_check ? $db_check->api_checks : '?',
             ]
+        ));
+    }
+
+    public function echo(Request $request): JsonResponse {
+        return response()->json(JsonResponseData::formatData(
+            $request,
+            'Is there an echo in here?',
+            Message::MESSAGE_OK,
+            $request->input(),
         ));
     }
 }

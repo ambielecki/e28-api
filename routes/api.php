@@ -4,7 +4,8 @@ use App\Library\JsonResponseData;
 use App\Library\Message;
 use Illuminate\Http\Request;
 
-Route::get('/health-check', 'ApiHealthCheckController@getHealthCheck');
+Route::get('/health-check', 'ApiTestController@getHealthCheck');
+Route::any('/echo', 'ApiTestController@echo');
 
 Route::post('/register', 'ApiAuthController@postRegister');
 Route::post('/login', 'ApiAuthController@postLogin');

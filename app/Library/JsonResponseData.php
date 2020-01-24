@@ -15,8 +15,11 @@ class JsonResponseData {
         return [
             'message' => $message,
             'message_type' => $message_type,
-            'route' => $request->path(),
-            'date' => gmdate('Y-m-d H:i:s e'),
+            'request_info' => [
+                'route' => $request->path(),
+                'method' => $request->method(),
+                'date' => gmdate('Y-m-d H:i:s e'),
+            ],
             'data' =>  $data,
         ];
     }
