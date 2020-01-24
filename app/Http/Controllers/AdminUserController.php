@@ -8,6 +8,7 @@ use Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Session;
 
 class AdminUserController extends Controller
 {
@@ -44,6 +45,8 @@ class AdminUserController extends Controller
         $user->is_admin = $request->input('is_admin') ? 1 : 0;
 
         if ($user->save()) {
+            Session::flash('flash_success', "User $user->first_name $user->last_name Updated Successfully");
+
             return redirect()->route('user_list');
         }
 
@@ -64,6 +67,8 @@ class AdminUserController extends Controller
         if ($user && Hash::check($request->input('current_password'), $user->password)) {
             $user->password = Hash::make($request->input('new_password'));
             if ($user->save()) {
+                Session::flash('flash_success', 'Password Updated Successfully');
+
                 return redirect()->route('home');
             }
         } else {

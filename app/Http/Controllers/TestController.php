@@ -10,7 +10,6 @@ class TestController extends Controller
 {
     public function getTest(Request $request): JsonResponse {
 
-
         return response()->json(JsonResponseData::formatData(
             $request
         ));

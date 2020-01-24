@@ -14,11 +14,6 @@
                                 <label for="current_password" class="col-md-4 col-form-label text-md-right">Current Password</label>
                                 <div class="col-md-8">
                                     <input class="form-control" id="current_password" name="current_password" type="password">
-                                    @error('current_password')
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 
@@ -26,11 +21,6 @@
                                 <label for="new_password" class="col-md-4 col-form-label text-md-right">New Password</label>
                                 <div class="col-md-8">
                                     <input class="form-control" id="new_password" name="new_password" type="password">
-                                    @error('new_password')
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 

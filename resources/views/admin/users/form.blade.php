@@ -2,11 +2,6 @@
     <label for="first_name" class="col-md-4 col-form-label text-md-right">First Name</label>
     <div class="col-md-8">
         <input class="form-control" id="first_name" name="first_name" type="text" value="{{ old('first_name', $user->first_name) }}">
-        @error('first_name')
-            <span class="text-danger">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
     </div>
 </div>
 
@@ -14,11 +9,6 @@
     <label for="last_name" class="col-md-4 col-form-label text-md-right">Last Name</label>
     <div class="col-md-8">
         <input class="form-control" id="last_name" name="last_name" type="text" value="{{ old('last_name', $user->last_name) }}">
-        @error('last_name')
-            <span class="text-danger">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
     </div>
 </div>
 
@@ -26,11 +16,6 @@
     <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
     <div class="col-md-8">
         <input class="form-control" id="email" name="email" type="text" value="{{ old('email', $user->email) }}">
-        @error('email')
-            <span class="text-danger">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
     </div>
 </div>
 
