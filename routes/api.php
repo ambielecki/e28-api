@@ -13,7 +13,12 @@ Route::post('/logout', 'ApiAuthController@postLogout');
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/user', function(Request $request) {
-        return $request->user();
+        return response()->json(JsonResponseData::formatData(
+            $request,
+            '',
+            Message::MESSAGE_OK,
+            $request->user()->toArray()
+        ));
     });
 });
 

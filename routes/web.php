@@ -19,5 +19,13 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/{user_id}', 'AdminUserController@getEdit')->name('user_edit');
             Route::post('/{user_id}', 'AdminUserController@postEdit');
         });
+
+        Route::group(['prefix' => '/event'], function () {
+            Route::get('/', 'AdminEventController@getList')->name('event_list');
+            Route::get('/create', 'AdminEventController@getCreate')->name('event_create');
+            Route::post('/create', 'AdminEventController@postCreate');
+            Route::get('/{event_id}', 'AdminEventController@getEdit')->name('event_edit');
+            Route::post('/{event_id}', 'AdminEventController@postEdit');
+        });
     });
 });
