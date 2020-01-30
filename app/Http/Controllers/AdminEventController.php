@@ -18,9 +18,11 @@ class AdminEventController extends Controller
                 ->orWhereRaw('LOWER(description) LIKE ?', $search);
         }
 
-        $events = $query->paginate(25);
+        $events = $query
+            ->with(['group', 'location'])
+            ->paginate(25);
 
-        return view('admin.users.list', [
+        return view('admin.events.list', [
             'events' => $events,
         ]);
     }
