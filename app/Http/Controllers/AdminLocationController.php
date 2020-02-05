@@ -42,18 +42,14 @@ class AdminLocationController extends Controller
     }
 
     public function postCreate(LocationRequest $request): RedirectResponse {
-        $location = new Location();
-        $location->group_id = $request->input('group_id');
-        $location->name = $request->input('name');
-        $location->description = $request->input('description');
-        $location->address = $request->input('address');
-        $location->link = $request->input('link');
+        $location = new Location($request->all());
 
         if ($location->save()) {
-            Session::flash('flash_success', "Location: $location->name Updated Successfully");
+            Session::flash('flash_success', "Location: $location->name Created Successfully");
 
             return redirect()->route('location_list');
         }
+
         Session::flash('flash_error', 'There was a problem saving your location, please try again.');
 
         return back()->withInput();

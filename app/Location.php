@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Location extends Model
 {
+    protected $fillable = [
+        'group_id',
+        'name',
+        'description',
+        'address',
+        'link',
+    ];
+
     public function events(): HasMany {
         return $this->hasMany(Event::class);
     }
