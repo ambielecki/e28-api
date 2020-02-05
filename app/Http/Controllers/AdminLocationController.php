@@ -66,6 +66,16 @@ class AdminLocationController extends Controller
     }
 
     public function postEdit(LocationRequest $request, $location_id): RedirectResponse {
-        return back();
+        $location = Location::find($location_id);
+
+        if ($location->update($request->all())) {
+            Session::flash('flash_success', "Location: $location->name Updated Successfully");
+
+            return redirect()->route('location_edit', $location_id);
+        }
+
+        Session::flash('flash_error', 'There was a problem updating your location, please try again.');
+
+        return back()->withInput();
     }
 }
