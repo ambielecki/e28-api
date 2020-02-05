@@ -15,4 +15,12 @@ class Group extends Model
     public function locations(): HasMany {
         return $this->hasMany(Location::class);
     }
+
+    public function getOptionsAttribute($value): array {
+        return json_decode($value, true);
+    }
+
+    public function setOptionsAttribute($value): void {
+        $this->attributes['options'] = json_encode($value);
+    }
 }

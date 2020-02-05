@@ -13,7 +13,7 @@ class GroupsTableSeeder extends Seeder
     {
         $user = new \App\Group();
         $user->name = 'All';
-        $user->options = json_encode([]);
+        $user->options = [];
         $user->save();
     }
 }
