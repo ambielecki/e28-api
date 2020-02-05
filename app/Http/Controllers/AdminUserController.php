@@ -92,8 +92,17 @@ class AdminUserController extends Controller
 
         $users = $query->get();
 
-        $array = $users->toArray();
+        $results = [];
 
-        return response()->json($users);
+        foreach ($users as $user) {
+            $results[] = [
+                'id' => $user->email,
+                'text' => $user->email,
+            ];
+        }
+
+        return response()->json([
+            'results' => $results,
+        ]);
     }
 }

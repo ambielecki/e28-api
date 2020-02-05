@@ -8,6 +8,6 @@
 <div class="form-group row">
     <label for="users" class="col-md-4 col-form-label text-md-right">Users</label>
     <div class="col-md-8">
-        <select class="form-control" id="users" name="users"></select>
+        <select class="form-control" id="users" name="users[]" multiple></select>
     </div>
 </div>

@@ -30,21 +30,26 @@
 
 @push('scripts')
     <script>
-        let token = document.getElementsByName('_token')[0].value;
+        $(document).ready(function () {
+            let token = document.getElementsByName('_token')[0].value;
 
-        $('#users').select2({
-            ajax: {
-                url: '/admin/users/ajax-list',
-                dataType: 'json',
-                data: function (params) {
-                    var query = {
-                        search: params.terms,
-                        _token: token,
-                    };
+            $('#users').select2({
+                ajax: {
+                    url: '/admin/users/ajax-list',
+                    dataType: 'json',
+                    delay: 500,
+                    data: function (params) {
+                        var query = {
+                            search: params.term,
+                            _token: token,
+                        };
 
-                    return query;
+                        return query;
+                    },
                 },
-            },
+                minimumInputLength: 2,
+                tags: true,
+            });
         });
     </script>
 @endpush
