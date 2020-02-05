@@ -18,8 +18,7 @@ class AdminGroupController extends Controller
             $query = $query->whereRaw('LOWER(name) LIKE ?', $search);
         }
 
-        $groups = $query
-            ->paginate(25);
+        $groups = $query->paginate(25);
 
         return view('admin.groups.list', [
             'groups' => $groups,
