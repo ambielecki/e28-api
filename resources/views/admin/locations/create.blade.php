@@ -8,7 +8,7 @@
                     <div class="card-header">Create Location</div>
 
                     <div class="card-body">
-                        <form id="user_edit" method="POST" action="{{ route('location_create') }}">
+                        <form id="location_create" method="POST" action="{{ route('location_create') }}">
                             @csrf
 
                             @include('admin.locations.form')

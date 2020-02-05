@@ -56,7 +56,7 @@ class AdminLocationController extends Controller
     }
 
     public function getEdit($location_id): View {
-        $location = Location::find($location_id)->with('group');
+        $location = Location::with('group')->find($location_id);
         $groups = Group::all();
 
         return view('admin.locations.edit', [
