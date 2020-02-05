@@ -27,3 +27,24 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        let token = document.getElementsByName('_token')[0].value;
+
+        $('#users').select2({
+            ajax: {
+                url: '/admin/users/ajax-list',
+                dataType: 'json',
+                data: function (params) {
+                    var query = {
+                        search: params.terms,
+                        _token: token,
+                    };
+
+                    return query;
+                },
+            },
+        });
+    </script>
+@endpush

@@ -18,6 +18,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/password', 'AdminUserController@postPassword');
             Route::get('/edit/{user_id}', 'AdminUserController@getEdit')->name('user_edit');
             Route::post('/edit/{user_id}', 'AdminUserController@postEdit');
+
+            Route::get('/ajax-list', 'AdminUserController@getAjaxList');
         });
 
         Route::group(['prefix' => '/events'], function () {

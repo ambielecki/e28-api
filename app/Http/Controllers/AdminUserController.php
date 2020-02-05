@@ -79,4 +79,21 @@ class AdminUserController extends Controller
 
         return back();
     }
+
+    public function getAjaxList(Request $request) {
+        $query = User::query();
+
+        if ($request->query('search')) {
+            $search = strtolower("%{$request->query('search')}%");
+            $query = $query->whereRaw('LOWER(first_name) LIKE ?', $search)
+                ->orWhereRaw('LOWER(last_name) LIKE ?', $search)
+                ->orWhereRaw('LOWER(email) LIKE ?', $search);
+        }
+
+        $users = $query->get();
+
+        $array = $users->toArray();
+
+        return response()->json($users);
+    }
 }
