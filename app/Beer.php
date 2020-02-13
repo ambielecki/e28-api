@@ -4,8 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
-class Beer extends Model
+class Beer extends ApiModel
 {
     public const STYLE_BOCK = 'bock';
     public const STYLE_BROWN_ALE = 'brown_ale';
@@ -35,5 +37,15 @@ class Beer extends Model
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
+    }
+
+    protected function addSearch(Request $request, Builder $query): Builder {
+        $search = "%{$request->input('search')}%";
+
+        $query = $query
+            ->where('name', 'LIKE', $search)
+            ->orWhere('style', 'LIKE', $search);
+
+        return $query;
     }
 }
