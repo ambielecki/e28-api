@@ -14,44 +14,16 @@ class BeersTableSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        $beer = new Beer();
-        $beer->user_id = 1;
-        $beer->name = 'McTesterson Stout';
-        $beer->style = Beer::STYLE_STOUT;
-        $beer->recipe = $faker->paragraphs(3, true);
-        $beer->brew_notes = $faker->paragraphs(3, true);
-        $beer->primary_fermentation_start = '2020-02-14 13:45';
+        foreach (Beer::STYLES as $style_id => $style_text) {
+            $beer = new Beer();
+            $beer->user_id = 1;
+            $beer->name = "McTesterson $style_text";
+            $beer->style = $style_id;
+            $beer->recipe = $faker->paragraphs(3, true);
+            $beer->brew_notes = $faker->paragraphs(3, true);
+            $beer->primary_fermentation_start = $faker->dateTimeThisYear()->format('Y-m-d h:i');
 
-        $beer->save();
-
-        $beer = new Beer();
-        $beer->user_id = 1;
-        $beer->name = 'McTesterson IPA';
-        $beer->style = Beer::STYLE_IPA;
-        $beer->recipe = $faker->paragraphs(3, true);
-        $beer->brew_notes = $faker->paragraphs(3, true);
-        $beer->primary_fermentation_start = '2020-02-14 13:45';
-
-        $beer->save();
-
-        $beer = new Beer();
-        $beer->user_id = 1;
-        $beer->name = 'McTesterson Pale Ale';
-        $beer->style = Beer::STYLE_PALE_ALE;
-        $beer->recipe = $faker->paragraphs(3, true);
-        $beer->brew_notes = $faker->paragraphs(3, true);
-        $beer->primary_fermentation_start = '2020-02-14 13:45';
-
-        $beer->save();
-
-        $beer = new Beer();
-        $beer->user_id = 1;
-        $beer->name = 'McTesterson Brown Ale';
-        $beer->style = Beer::STYLE_BROWN_ALE;
-        $beer->recipe = $faker->paragraphs(3, true);
-        $beer->brew_notes = $faker->paragraphs(3, true);
-        $beer->primary_fermentation_start = '2020-02-14 13:45';
-
-        $beer->save();
+            $beer->save();
+        }
     }
 }
