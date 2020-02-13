@@ -18,8 +18,8 @@ class AdminGroupController extends Controller
         $query = Group::query();
 
         if ($request->query('search')) {
-            $search = strtolower("%{$request->query('search')}%");
-            $query = $query->whereRaw('LOWER(name) LIKE ?', $search);
+            $search = "%{$request->query('search')}%";
+            $query = $query->where('name', 'LIKE', $search);
         }
 
         $groups = $query->paginate(25);

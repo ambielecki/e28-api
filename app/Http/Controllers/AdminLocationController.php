@@ -16,10 +16,11 @@ class AdminLocationController extends Controller
         $query = Location::query();
 
         if ($request->query('search')) {
-            $search = strtolower("%{$request->query('search')}%");
-            $query = $query->whereRaw('LOWER(name) LIKE ?', $search)
-                ->orWhereRaw('LOWER(description) LIKE ?', $search)
-                ->orWhereRaw('LOWER(address) LIKE ?', $search);
+            $search = "%{$request->query('search')}%";
+            $query = $query
+                ->where('name', 'LIKE', $search)
+                ->orWhere('description', 'LIKE', $search)
+                ->orWhere('address', 'LIKE', $search);
         }
 
         $locations = $query

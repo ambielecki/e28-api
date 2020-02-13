@@ -16,10 +16,11 @@ class AdminUserController extends Controller
         $query = User::query();
 
         if ($request->query('search')) {
-            $search = strtolower("%{$request->query('search')}%");
-            $query = $query->whereRaw('LOWER(first_name) LIKE ?', $search)
-                ->orWhereRaw('LOWER(last_name) LIKE ?', $search)
-                ->orWhereRaw('LOWER(email) LIKE ?', $search);
+            $search = "%{$request->query('search')}%";
+            $query = $query
+                ->where('first_name', 'LIKE', $search)
+                ->orWhere('last_name', 'LIKE', $search)
+                ->orWhere('email', 'LIKE', $search);
         }
 
         $users = $query->paginate(25);
@@ -84,10 +85,11 @@ class AdminUserController extends Controller
         $query = User::query();
 
         if ($request->query('search')) {
-            $search = strtolower("%{$request->query('search')}%");
-            $query = $query->whereRaw('LOWER(first_name) LIKE ?', $search)
-                ->orWhereRaw('LOWER(last_name) LIKE ?', $search)
-                ->orWhereRaw('LOWER(email) LIKE ?', $search);
+            $search = "%{$request->query('search')}%";
+            $query = $query
+                ->where('first_name', 'LIKE', $search)
+                ->orWhere('last_name', 'LIKE', $search)
+                ->orWhere('email', 'LIKE', $search);
         }
 
         $users = $query->get();
