@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,5 +52,9 @@ class User extends Authenticatable implements JWTSubject
 
     public function groups(): BelongsToMany {
         return $this->belongsToMany(Group::class)->withTimestamps();
+    }
+
+    public function beers(): HasMany {
+        return $this->hasMany(Beer::class);
     }
 }

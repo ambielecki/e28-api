@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Beer extends Model
 {
@@ -31,4 +32,8 @@ class Beer extends Model
         self::STYLE_STOUT => 'Stout',
         self::STYLE_WHEAT => 'Wheat',
     ];
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
+    }
 }

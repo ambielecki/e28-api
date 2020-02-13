@@ -17,10 +17,10 @@ class CreateBeersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->text('name');
-            $table->text('style');
-            $table->text('recipe');
-            $table->text('brew_notes');
-            $table->text('tasting_notes');
+            $table->text('style')->nullable();
+            $table->text('recipe')->nullable();
+            $table->text('brew_notes')->nullable();
+            $table->text('tasting_notes')->nullable();
             $table->decimal('original_gravity', 5, 4)->nullable();
             $table->decimal('final_gravity', 5, 4)->nullable();
             $table->dateTime('primary_fermentation_start');

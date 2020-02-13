@@ -22,6 +22,14 @@ Route::group(['middleware' => ['auth:api']], function () {
     });
 });
 
+Route::group(['prefix' => 'beer'], function () {
+    Route::get('/', 'ApiBeerController@getList');
+    Route::post('/', 'ApiBeerController@postBeer');
+    Route::get('/{id}', 'ApiBeerController@getBeer');
+    Route::put('/{id}', 'ApiBeerController@updateBeer');
+    Route::delete('/{id}', 'ApiBeerController@deleteBeer');
+});
+
 Route::fallback(function (Request $request) {
     return response()->json(JsonResponseData::formatData(
         $request,
