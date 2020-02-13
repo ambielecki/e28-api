@@ -21,6 +21,7 @@ abstract class ApiModel extends Model {
             $query = $this->addSearch($request, $query);
         }
 
+        // TODO: Implement check of sortable fields
         if ($request->input('sort')) {
             $query = $query->orderBy(
                 $request->input('sort'),
