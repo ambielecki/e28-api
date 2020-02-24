@@ -58,22 +58,4 @@ class ApiTestController extends Controller
             $request->input(),
         ));
     }
-
-    public function getUser(Request $request): JsonResponse {
-        return response()->json(JsonResponseData::formatData(
-            $request,
-            '',
-            Message::MESSAGE_OK,
-            $request->user()->toArray()
-        ));
-    }
-
-    public function getFallThrough(Request $request): JsonResponse {
-        return response()->json(JsonResponseData::formatData(
-            $request,
-            'Page Not Found',
-            Message::MESSAGE_ERROR,
-            []
-        ), 404);
-    }
 }

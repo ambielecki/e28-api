@@ -12,7 +12,7 @@ Route::post('/login', 'ApiAuthController@postLogin');
 Route::post('/logout', 'ApiAuthController@postLogout');
 
 Route::group(['middleware' => ['auth:api']], function () {
-    Route::get('/user', 'ApiTestController@getUser');
+    Route::get('/user', 'ApiUserController@getUser');
 });
 
 Route::group(['prefix' => 'beer'], function () {
@@ -23,4 +23,4 @@ Route::group(['prefix' => 'beer'], function () {
     Route::delete('/{id}', 'ApiBeerController@deleteBeer');
 });
 
-Route::fallback('ApiTestController@getFallThrough');
+Route::fallback('ApiFallBackController@getFallBack');
