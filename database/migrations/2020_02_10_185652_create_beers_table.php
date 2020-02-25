@@ -19,10 +19,12 @@ class CreateBeersTable extends Migration
             $table->text('name');
             $table->text('style')->nullable();
             $table->text('recipe')->nullable();
-            $table->text('brew_notes')->nullable();
-            $table->text('tasting_notes')->nullable();
+            $table->json('brew_notes')->nullable();
+            $table->json('tasting_notes')->nullable();
             $table->decimal('original_gravity', 5, 4)->nullable();
+            $table->decimal('og_temperature', 3, 2)->nullable();
             $table->decimal('final_gravity', 5, 4)->nullable();
+            $table->decimal('fg_temperature', 3, 2)->nullable();
             $table->dateTime('primary_fermentation_start');
             $table->dateTime('primary_fermentation_end')->nullable();
             $table->dateTime('secondary_fermentation_end')->nullable();

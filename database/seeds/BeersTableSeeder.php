@@ -20,7 +20,7 @@ class BeersTableSeeder extends Seeder
             $beer->name = "McTesterson $style_text";
             $beer->style = $style_id;
             $beer->recipe = $faker->paragraphs(3, true);
-            $beer->brew_notes = $faker->paragraphs(3, true);
+            $beer->brew_notes = [$faker->paragraphs(1, true), $faker->paragraphs(1, true), $faker->paragraphs(1, true)];
             $beer->primary_fermentation_start = $faker->dateTimeThisYear()->format('Y-m-d h:i');
 
             $beer->save();
