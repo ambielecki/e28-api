@@ -16,6 +16,7 @@ class CreateBeersTable extends Migration
         Schema::create('beers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->boolean('is_public')->default(0);
             $table->text('name');
             $table->text('style')->nullable();
             $table->text('recipe')->nullable();
