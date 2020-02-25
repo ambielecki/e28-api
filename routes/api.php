@@ -1,9 +1,5 @@
 <?php
 
-use App\Library\JsonResponseData;
-use App\Library\Message;
-use Illuminate\Http\Request;
-
 Route::get('/health-check', 'ApiTestController@getHealthCheck');
 Route::any('/echo', 'ApiTestController@echo');
 
@@ -17,10 +13,12 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 Route::group(['prefix' => 'beer'], function () {
     Route::get('/', 'ApiBeerController@getList');
-    Route::post('/', 'ApiBeerController@postBeer');
     Route::get('/{id}', 'ApiBeerController@getBeer');
-    Route::put('/{id}', 'ApiBeerController@updateBeer');
-    Route::delete('/{id}', 'ApiBeerController@deleteBeer');
+    Route::group(['middleware' => ['auth:api']], function () {
+        Route::post('/', 'ApiBeerController@postBeer');
+        Route::put('/{id}', 'ApiBeerController@updateBeer');
+        Route::delete('/{id}', 'ApiBeerController@deleteBeer');
+    });
 });
 
 Route::fallback('ApiFallBackController@getFallBack');

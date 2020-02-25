@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use JWTAuth;
 
 class Beer extends ApiModel
 {
@@ -38,7 +39,7 @@ class Beer extends ApiModel
         return $this->belongsTo(User::class);
     }
 
-    public function getBrewNotesAttribute($value) {
+    public function getBrewNotesAttribute($value): ?array {
         return json_decode($value, true);
     }
 
@@ -46,7 +47,7 @@ class Beer extends ApiModel
         $this->attributes['brew_notes'] = json_encode($value);
     }
 
-    public function getTastingNotesAttribute($value) {
+    public function getTastingNotesAttribute($value): ?array {
         return json_decode($value, true);
     }
 
@@ -57,10 +58,32 @@ class Beer extends ApiModel
     protected function addSearch(Request $request, Builder $query): Builder {
         $search = "%{$request->input('search')}%";
 
-        $query = $query
-            ->where('name', 'LIKE', $search)
-            ->orWhere('style', 'LIKE', $search);
+        $query = $query->where(function ($query) use ($search) {
+            $query->where('name', 'LIKE', $search)
+                ->orWhere('style', 'LIKE', $search);
+        });
+
 
         return $query;
+    }
+
+    protected function addAuthorization(Request $request, Builder $query): Builder {
+        $user = JWTAuth::getToken() ? JWTAuth::parseToken()->toUser() : null;
+        if ($user) {
+            $all_beers = $request->input('all_beers');
+
+            if ($all_beers === 'true') {
+                $query = $query->where(function ($query) use ($user) {
+                    $query->where('user_id', $user->id)
+                        ->orWhere('is_public', 1);
+                });
+            } else {
+                $query = $query->where('user_id', $user->id);
+            }
+
+            return $query;
+        }
+
+        return $query->where('is_public', 1);
     }
 }

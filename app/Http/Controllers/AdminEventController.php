@@ -14,8 +14,10 @@ class AdminEventController extends Controller
 
         if ($request->query('search')) {
             $search = "%{$request->query('search')}%";
-            $query = $query->where('title', 'LIKE', $search)
-                ->orWhere('description', 'LIKE', $search);
+            $query = $query->where(function ($query) use ($search) {
+                $query->where('title', 'LIKE', $search)
+                    ->orWhere('description', 'LIKE', $search);
+            });
         }
 
         $events = $query

@@ -11,13 +11,20 @@ use Illuminate\Http\Request;
 use Str;
 
 abstract class ApiModel extends Model {
-    abstract protected function addSearch(Request $request, Builder $query): Builder;
+    protected function addSearch(Request $request, Builder $query): Builder {
+        return $query;
+    }
+
+    protected function addAuthorization(Request $request, Builder $query): Builder {
+        return $query;
+    }
 
     public function getResponse(Request $request, Builder $query): JsonResponse {
         $limit = (int) ($request->input('limit') ?? '25');
         $page = (int) ($request->input('page') ?? '1');
         $skip = ($page - 1) * $limit;
 
+        $query = $this->addAuthorization($request, $query);
         if ($request->input('search')) {
             $query = $this->addSearch($request, $query);
         }

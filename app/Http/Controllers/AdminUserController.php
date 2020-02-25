@@ -86,10 +86,11 @@ class AdminUserController extends Controller
 
         if ($request->query('search')) {
             $search = "%{$request->query('search')}%";
-            $query = $query
-                ->where('first_name', 'LIKE', $search)
-                ->orWhere('last_name', 'LIKE', $search)
-                ->orWhere('email', 'LIKE', $search);
+            $query = $query->where(function ($query) use ($search) {
+                $query->where('first_name', 'LIKE', $search)
+                    ->orWhere('last_name', 'LIKE', $search)
+                    ->orWhere('email', 'LIKE', $search);
+            });
         }
 
         $users = $query->get();

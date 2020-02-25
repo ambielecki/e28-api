@@ -19,6 +19,20 @@ class BeersTableSeeder extends Seeder
             $beer->user_id = 1;
             $beer->name = "McTesterson $style_text";
             $beer->style = $style_id;
+            $beer->is_public = random_int(0, 1);
+            $beer->recipe = $faker->paragraphs(3, true);
+            $beer->brew_notes = [$faker->paragraphs(1, true), $faker->paragraphs(1, true), $faker->paragraphs(1, true)];
+            $beer->primary_fermentation_start = $faker->dateTimeThisYear()->format('Y-m-d h:i');
+
+            $beer->save();
+        }
+
+        foreach (Beer::STYLES as $style_id => $style_text) {
+            $beer = new Beer();
+            $beer->user_id = 2;
+            $beer->name = "Testy $style_text";
+            $beer->style = $style_id;
+            $beer->is_public = random_int(0, 1);
             $beer->recipe = $faker->paragraphs(3, true);
             $beer->brew_notes = [$faker->paragraphs(1, true), $faker->paragraphs(1, true), $faker->paragraphs(1, true)];
             $beer->primary_fermentation_start = $faker->dateTimeThisYear()->format('Y-m-d h:i');
