@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Str;
 
 abstract class ApiModel extends Model {
     abstract protected function addSearch(Request $request, Builder $query): Builder;
@@ -36,12 +37,14 @@ abstract class ApiModel extends Model {
             ->limit($limit)
             ->get();
 
+        $class_name = Str::plural(Str::snake((new \ReflectionClass($this))->getShortName()));
+
         return response()->json(JsonResponseData::formatData(
             $request,
             '',
             Message::MESSAGE_OK,
             [
-                'items' => $items,
+                $class_name => $items,
                 'count' => $count,
                 'limit' => $limit,
                 'page' => $page,
