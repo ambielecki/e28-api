@@ -14,9 +14,19 @@ class ApiBeerRequest extends FormRequest {
     public function rules(): array {
         return [
             'name' => 'string|required',
-            'style' => 'string|required',
-            'recipe' => 'string',
-
+            'style' => 'nullable|string',
+            'recipe' => 'nullable|string',
+            'brew_notes.*' => 'nullable|string',
+            'tasting_notes.*' => 'nullable|string',
+            'original_gravity' => 'nullable|numeric',
+            'final_gravity' => 'nullable|numeric',
+            'og_temperature' => 'nullable|numeric',
+            'fg_temperature' => 'nullable|numeric',
+            'primary_fermentation_start' => 'required|date',
+            'primary_fermentation_end' => 'nullable|date',
+            'secondary_fermentation_end' => 'nullable|date',
+            'bottling' => 'nullable|date',
+            'rating' => 'nullable|integer',
         ];
     }
 }

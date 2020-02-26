@@ -21,6 +21,7 @@ class ApiBeerController extends Controller
 
     public function postBeer(ApiBeerRequest $request): JsonResponse {
         $beer = new Beer($request->all());
+        $beer->user_id = \Auth::user()->id;
 
         if ($beer->save()) {
             return response()->json(JsonResponseData::formatData(
@@ -36,7 +37,7 @@ class ApiBeerController extends Controller
             'There was a problem saving your beer',
             Message::MESSAGE_ERROR,
             [],
-        ));
+        ), 500);
     }
 
     public function getBeer(Request $request, $id): JsonResponse {

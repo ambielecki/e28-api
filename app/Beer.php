@@ -35,6 +35,8 @@ class Beer extends ApiModel
         self::STYLE_WHEAT => 'Wheat',
     ];
 
+    protected $guarded = ['id', 'user_id'];
+
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
