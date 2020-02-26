@@ -69,6 +69,7 @@ class Beer extends ApiModel
 
     protected function addAuthorization(Request $request, Builder $query): Builder {
         $user = JWTAuth::getToken() ? JWTAuth::parseToken()->toUser() : null;
+
         if ($user) {
             $all_beers = $request->input('all_beers');
 

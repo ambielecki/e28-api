@@ -26,6 +26,7 @@ class ApiBeerController extends Controller
     public function getBeer(Request $request, $id): JsonResponse {
         $beer = Beer::find($id);
         if ($beer) {
+            // TODO :: handle exception for expired token
             $user = JWTAuth::getToken() ? JWTAuth::parseToken()->toUser() : null;
 
             if ($beer->is_public || ($user && $user->id === $beer->user_id)) {
