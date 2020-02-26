@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Beer;
+use App\Http\Requests\ApiBeerRequest;
 use App\Library\JsonResponseData;
 use App\Library\Message;
 use Illuminate\Http\JsonResponse;
@@ -18,9 +19,24 @@ class ApiBeerController extends Controller
         return $beer->getResponse($request, $query);
     }
 
-    public function postBeer(Request $request): JsonResponse {
+    public function postBeer(ApiBeerRequest $request): JsonResponse {
+        $beer = new Beer($request->all());
 
-        return response()->json([]);
+        if ($beer->save()) {
+            return response()->json(JsonResponseData::formatData(
+                $request,
+                'Beer saved successfully',
+                Message::MESSAGE_OK,
+                ['id' => $beer->id],
+            ));
+        }
+
+        return response()->json(JsonResponseData::formatData(
+            $request,
+            'There was a problem saving your beer',
+            Message::MESSAGE_ERROR,
+            [],
+        ));
     }
 
     public function getBeer(Request $request, $id): JsonResponse {
