@@ -42,7 +42,7 @@ class ApiBeerController extends Controller
             $request,
             'Beer saved successfully',
             Message::MESSAGE_OK,
-            ['id' => $beer->id],
+            ['beer' => $beer],
         ));
     }
 
