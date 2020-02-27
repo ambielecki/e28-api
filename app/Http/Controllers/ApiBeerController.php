@@ -73,6 +73,7 @@ class ApiBeerController extends Controller
 
     public function updateBeer(ApiBeerRequest $request, $id): JsonResponse {
         $beer = Beer::find($id);
+
         if ($beer) {
             if ($beer->user_id === \Auth::user()->id) {
                 $beer->fill($request->all());
@@ -111,7 +112,40 @@ class ApiBeerController extends Controller
     }
 
     public function deleteBeer(Request $request, $id): JsonResponse {
+        $beer = Beer::find($id);
 
-        return response()->json([]);
+        if ($beer) {
+            if ($beer->user_id === \Auth::user()->id) {
+                if ($beer->delete()) {
+                    return response()->json(JsonResponseData::formatData(
+                        $request,
+                        'Beer Deleted',
+                        Message::MESSAGE_SUCCESS,
+                        [],
+                    ));
+                }
+
+                return response()->json(JsonResponseData::formatData(
+                    $request,
+                    'There was a problem deleting your beer',
+                    Message::MESSAGE_ERROR,
+                    [],
+                ), 500);
+            }
+
+            return response()->json(JsonResponseData::formatData(
+                $request,
+                'This is not your beer',
+                Message::MESSAGE_WARNING,
+                [],
+            ), 401);
+        }
+
+        return response()->json(JsonResponseData::formatData(
+            $request,
+            'Beer not found',
+            Message::MESSAGE_WARNING,
+            [],
+        ), 404);
     }
 }
