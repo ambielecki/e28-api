@@ -6,9 +6,11 @@ use App\Beer;
 use App\Http\Requests\ApiBeerRequest;
 use App\Library\JsonResponseData;
 use App\Library\Message;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use JWTAuth;
+use Log;
 
 class ApiBeerController extends Controller
 {
@@ -23,28 +25,38 @@ class ApiBeerController extends Controller
         $beer = new Beer($request->all());
         $beer->user_id = \Auth::user()->id;
 
-        if ($beer->save()) {
+        try {
+            $beer->save();
+
             return response()->json(JsonResponseData::formatData(
                 $request,
                 'Beer saved successfully',
                 Message::MESSAGE_OK,
                 ['id' => $beer->id],
             ));
-        }
+        } catch (Exception $exception) {
+            Log::error($exception);
 
-        return response()->json(JsonResponseData::formatData(
-            $request,
-            'There was a problem saving your beer',
-            Message::MESSAGE_ERROR,
-            [],
-        ), 500);
+            return response()->json(JsonResponseData::formatData(
+                $request,
+                'There was a problem saving your beer',
+                Message::MESSAGE_ERROR,
+                [],
+            ), 500);
+        }
     }
 
     public function getBeer(Request $request, $id): JsonResponse {
         $beer = Beer::find($id);
+
         if ($beer) {
-            // TODO :: handle exception for expired token
-            $user = JWTAuth::getToken() ? JWTAuth::parseToken()->toUser() : null;
+            $user = null;
+
+            try {
+                $user = JWTAuth::parseToken()->toUser();
+            } catch (Exception $exception) {
+                Log::warning($exception);
+            }
 
             if ($beer->is_public || ($user && $user->id === $beer->user_id)) {
                 return response()->json(JsonResponseData::formatData(
@@ -77,22 +89,25 @@ class ApiBeerController extends Controller
         if ($beer) {
             if ($beer->user_id === \Auth::user()->id) {
                 $beer->fill($request->all());
+                try {
+                    $beer->save();
 
-                if ($beer->save()) {
                     return response()->json(JsonResponseData::formatData(
                         $request,
                         'Beer Updated',
                         Message::MESSAGE_SUCCESS,
                         ['beer' => $beer],
                     ));
-                }
+                } catch (Exception $exception) {
+                    Log::error($exception);
 
-                return response()->json(JsonResponseData::formatData(
-                    $request,
-                    'There was a problem updating your beer',
-                    Message::MESSAGE_ERROR,
-                    [],
-                ), 500);
+                    return response()->json(JsonResponseData::formatData(
+                        $request,
+                        'There was a problem updating your beer',
+                        Message::MESSAGE_ERROR,
+                        [],
+                    ), 500);
+                }
             }
 
             return response()->json(JsonResponseData::formatData(
@@ -116,21 +131,25 @@ class ApiBeerController extends Controller
 
         if ($beer) {
             if ($beer->user_id === \Auth::user()->id) {
-                if ($beer->delete()) {
+                try {
+                    $beer->delete();
+
                     return response()->json(JsonResponseData::formatData(
                         $request,
                         'Beer Deleted',
                         Message::MESSAGE_SUCCESS,
                         [],
                     ));
-                }
+                } catch (Exception $exception) {
+                    Log::error($exception);
 
-                return response()->json(JsonResponseData::formatData(
-                    $request,
-                    'There was a problem deleting your beer',
-                    Message::MESSAGE_ERROR,
-                    [],
-                ), 500);
+                    return response()->json(JsonResponseData::formatData(
+                        $request,
+                        'There was a problem deleting your beer',
+                        Message::MESSAGE_ERROR,
+                        [],
+                    ), 500);
+                }
             }
 
             return response()->json(JsonResponseData::formatData(

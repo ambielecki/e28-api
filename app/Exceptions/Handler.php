@@ -70,11 +70,13 @@ class Handler extends ExceptionHandler
 
     protected function invalidJson($request, ValidationException $exception): JsonResponse
     {
+        \Log::error($exception);
+
         return response()->json(JsonResponseData::formatData(
             $request,
             $exception->getMessage(),
             Message::MESSAGE_ERROR,
-            ['errors' => $exception->errors()]
+            []
         ), $exception->status);
     }
 }
