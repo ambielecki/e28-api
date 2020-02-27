@@ -27,13 +27,6 @@ class ApiBeerController extends Controller
 
         try {
             $beer->save();
-
-            return response()->json(JsonResponseData::formatData(
-                $request,
-                'Beer saved successfully',
-                Message::MESSAGE_OK,
-                ['id' => $beer->id],
-            ));
         } catch (Exception $exception) {
             Log::error($exception);
 
@@ -44,6 +37,13 @@ class ApiBeerController extends Controller
                 [],
             ), 500);
         }
+
+        return response()->json(JsonResponseData::formatData(
+            $request,
+            'Beer saved successfully',
+            Message::MESSAGE_OK,
+            ['id' => $beer->id],
+        ));
     }
 
     public function getBeer(Request $request, $id): JsonResponse {
@@ -91,13 +91,6 @@ class ApiBeerController extends Controller
                 $beer->fill($request->all());
                 try {
                     $beer->save();
-
-                    return response()->json(JsonResponseData::formatData(
-                        $request,
-                        'Beer Updated',
-                        Message::MESSAGE_SUCCESS,
-                        ['beer' => $beer],
-                    ));
                 } catch (Exception $exception) {
                     Log::error($exception);
 
@@ -108,6 +101,13 @@ class ApiBeerController extends Controller
                         [],
                     ), 500);
                 }
+
+                return response()->json(JsonResponseData::formatData(
+                    $request,
+                    'Beer Updated',
+                    Message::MESSAGE_SUCCESS,
+                    ['beer' => $beer],
+                ));
             }
 
             return response()->json(JsonResponseData::formatData(
@@ -133,13 +133,6 @@ class ApiBeerController extends Controller
             if ($beer->user_id === \Auth::user()->id) {
                 try {
                     $beer->delete();
-
-                    return response()->json(JsonResponseData::formatData(
-                        $request,
-                        'Beer Deleted',
-                        Message::MESSAGE_SUCCESS,
-                        [],
-                    ));
                 } catch (Exception $exception) {
                     Log::error($exception);
 
@@ -150,6 +143,13 @@ class ApiBeerController extends Controller
                         [],
                     ), 500);
                 }
+
+                return response()->json(JsonResponseData::formatData(
+                    $request,
+                    'Beer Deleted',
+                    Message::MESSAGE_SUCCESS,
+                    [],
+                ));
             }
 
             return response()->json(JsonResponseData::formatData(
