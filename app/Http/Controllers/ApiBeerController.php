@@ -167,4 +167,13 @@ class ApiBeerController extends Controller
             [],
         ), 404);
     }
+
+    public function getStyles(Request $request): JsonResponse {
+        return response()->json(JsonResponseData::formatData(
+            $request,
+            '',
+            Message::MESSAGE_OK,
+            ['styles' => Beer::STYLES],
+        ));
+    }
 }
