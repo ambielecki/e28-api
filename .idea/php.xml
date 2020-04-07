@@ -99,6 +99,7 @@
       <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <path value="$PROJECT_DIR$/vendor/rap2hpoutre/laravel-log-viewer" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-cors" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
