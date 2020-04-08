@@ -6,6 +6,7 @@ Route::any('/echo', 'ApiTestController@echo');
 Route::post('/register', 'ApiAuthController@postRegister');
 Route::post('/login', 'ApiAuthController@postLogin');
 Route::post('/logout', 'ApiAuthController@postLogout');
+Route::post('/refresh', 'ApiAuthController@postRefresh');
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/user', 'ApiUserController@getUser');

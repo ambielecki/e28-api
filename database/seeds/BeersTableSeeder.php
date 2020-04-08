@@ -16,7 +16,7 @@ class BeersTableSeeder extends Seeder
 
         foreach (Beer::STYLES as $style_id => $style_text) {
             $beer = new Beer();
-            $beer->user_id = 1;
+            $beer->user_id = 2;
             $beer->name = "McTesterson $style_text";
             $beer->style = $style_id;
             $beer->is_public = random_int(0, 1);
