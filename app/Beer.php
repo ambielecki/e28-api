@@ -41,22 +41,6 @@ class Beer extends ApiModel
         return $this->belongsTo(User::class);
     }
 
-    public function getBrewNotesAttribute($value): ?array {
-        return json_decode($value, true);
-    }
-
-    public function setBrewNotesAttribute($value): void {
-        $this->attributes['brew_notes'] = json_encode($value);
-    }
-
-    public function getTastingNotesAttribute($value): ?array {
-        return json_decode($value, true);
-    }
-
-    public function setTastingNotesAttribute($value): void {
-        $this->attributes['tasting_notes'] = json_encode($value);
-    }
-
     protected function addSearch(Request $request, Builder $query): Builder {
         $search = "%{$request->input('search')}%";
 
