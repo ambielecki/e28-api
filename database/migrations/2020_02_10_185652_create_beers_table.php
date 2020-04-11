@@ -26,8 +26,7 @@ class CreateBeersTable extends Migration
             $table->decimal('original_gravity', 5, 4)->nullable();
             $table->decimal('final_gravity', 5, 4)->nullable();
             $table->dateTime('primary_fermentation_start');
-            $table->dateTime('primary_fermentation_end')->nullable();
-            $table->dateTime('secondary_fermentation_end')->nullable();
+            $table->dateTime('secondary_fermentation_start')->nullable();
             $table->dateTime('bottling')->nullable();
             $table->integer('rating')->nullable();
             $table->timestamps();
