@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateBeersTable extends Migration
 {
-    /**
+    /**a
      * Run the migrations.
      *
      * @return void

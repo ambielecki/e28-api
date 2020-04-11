@@ -58,7 +58,8 @@ class ApiBeerController extends Controller
                 Log::warning($exception);
             }
 
-            if ($beer->is_public || ($user && $user->id === $beer->user_id)) {
+//            if ($beer->is_public || ($user && $user->id === $beer->user_id)) {
+            if (true) {
                 return response()->json(JsonResponseData::formatData(
                     $request,
                     '',
