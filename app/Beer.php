@@ -54,23 +54,25 @@ class Beer extends ApiModel
     }
 
     protected function addAuthorization(Request $request, Builder $query): Builder {
-        $user = JWTAuth::getToken() ? JWTAuth::parseToken()->toUser() : null;
+//        $user = JWTAuth::getToken() ? JWTAuth::parseToken()->toUser() : null;
+//
+//        if ($user) {
+//            $all_beers = $request->input('all_beers');
+//
+//            if ($all_beers === 'true') {
+//                $query = $query->where(function ($query) use ($user) {
+//                    $query->where('user_id', $user->id)
+//                        ->orWhere('is_public', 1);
+//                });
+//            } else {
+//                $query = $query->where('user_id', $user->id);
+//            }
+//
+//            return $query;
+//        }
+//
+//        return $query->where('is_public', 1);
 
-        if ($user) {
-            $all_beers = $request->input('all_beers');
-
-            if ($all_beers === 'true') {
-                $query = $query->where(function ($query) use ($user) {
-                    $query->where('user_id', $user->id)
-                        ->orWhere('is_public', 1);
-                });
-            } else {
-                $query = $query->where('user_id', $user->id);
-            }
-
-            return $query;
-        }
-
-        return $query->where('is_public', 1);
+        return $query; // Not using Auth for P2
     }
 }
