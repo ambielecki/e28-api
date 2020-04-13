@@ -10,22 +10,23 @@ set('application', 'my_project');
 set('repository', 'git@github.com:ambielecki/e28-api.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
-set('git_tty', true); 
+set('git_tty', true);
 
-// Shared files/dirs between deploys 
+// Shared files/dirs between deploys
 add('shared_files', []);
 add('shared_dirs', []);
 
-// Writable dirs by web server 
+// Writable dirs by web server
 add('writable_dirs', []);
 set('allow_anonymous_stats', false);
+set('keep_releases', 3);
 
 host('andrewbielecki.com')
     ->user('ambielecki')
     ->stage('production')
     ->set('deploy_path', '/var/www/html/e28-api');
 
-    
+
 // Tasks
 
 task('build', function () {
