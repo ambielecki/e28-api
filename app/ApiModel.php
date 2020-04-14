@@ -25,9 +25,9 @@ abstract class ApiModel extends Model {
         $skip = ($page - 1) * $limit;
 
         $query = $this->addAuthorization($request, $query);
-        if ($request->input('search')) {
-            $query = $this->addSearch($request, $query);
-        }
+
+        $query = $this->addSearch($request, $query);
+
 
         // TODO: Implement check of sortable fields
         if ($request->input('sort')) {

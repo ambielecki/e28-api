@@ -42,13 +42,19 @@ class Beer extends ApiModel
     }
 
     protected function addSearch(Request $request, Builder $query): Builder {
-        $search = "%{$request->input('search')}%";
+        $style = $request->input('style');
+        if ($style) {
+            $query = $query->where('style', $style);
+        }
 
-        $query = $query->where(function ($query) use ($search) {
-            $query->where('name', 'LIKE', $search)
-                ->orWhere('style', 'LIKE', $search);
-        });
+        if ($request->input('search')) {
+            $search = "%{$request->input('search')}%";
 
+            $query = $query->where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', $search)
+                    ->orWhere('yeast', 'LIKE', $search);
+            });
+        }
 
         return $query;
     }
