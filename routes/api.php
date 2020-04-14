@@ -3,6 +3,7 @@
 Route::get('/health-check', 'ApiTestController@getHealthCheck');
 Route::any('/echo', 'ApiTestController@echo');
 
+Route::get('/home', 'ApiHomeController@getHome');
 Route::post('/register', 'ApiAuthController@postRegister');
 Route::post('/login', 'ApiAuthController@postLogin');
 Route::post('/logout', 'ApiAuthController@postLogout');

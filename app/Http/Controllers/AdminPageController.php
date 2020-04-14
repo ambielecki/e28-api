@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\PageRequest;
+use App\Page;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Session;
+
+class AdminPageController extends Controller
+{
+    public function getList(): View {
+        $query = Page::query();
+        $pages = $query->paginate(25);
+
+        return view('admin.pages.list', [
+            'pages' => $pages,
+        ]);
+    }
+
+    public function getCreate() {
+
+    }
+
+    public function getEdit($page_id): View {
+        $page = Page::find($page_id);
+
+        return view('admin.pages.edit', [
+            'page' => $page
+        ]);
+    }
+
+    public function postEdit(PageRequest $request, $page_id): RedirectResponse {
+        $page = Page::find($page_id);
+
+        if ($page->save()) {
+            Session::flash('flash_success', "Page Updated Successfully");
+
+            return redirect()->route('page_list');
+        }
+
+        return back()->withInput();
+    }
+}
