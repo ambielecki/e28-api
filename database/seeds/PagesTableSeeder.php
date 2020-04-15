@@ -39,6 +39,6 @@ Application using Vue.js.  The site is backed by a Laravel API and hosted on Dig
 Whether it is coding or homebrew, now is a great time to start and track a new hobby!
 </p>
 TEXT;
-
+        $page->save();
     }
 }
