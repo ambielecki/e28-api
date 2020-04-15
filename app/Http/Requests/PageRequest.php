@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Page;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PageRequest extends FormRequest
 {
@@ -24,7 +26,9 @@ class PageRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'app' => 'string|required|' . Rule::in(Page::APPS),
+            'page' => 'string|required|' . Rule::in(Page::PAGE_TYPES),
+            'content' => 'string|required',
         ];
     }
 }
