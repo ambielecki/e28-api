@@ -6,6 +6,7 @@ use App\Beer;
 use App\Http\Requests\ApiBeerRequest;
 use App\Library\JsonResponseData;
 use App\Library\Message;
+use App\Page;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -175,6 +176,22 @@ class ApiBeerController extends Controller
             '',
             Message::MESSAGE_OK,
             ['styles' => Beer::STYLES],
+        ));
+    }
+
+    public function getHomePage(Request $request): JsonResponse {
+        $page = Page::query()
+            ->where([
+                ['app', Page::APP_BEER],
+                ['page', Page::PAGE_TYPE_HOME],
+            ])
+            ->first();
+
+        return response()->json(JsonResponseData::formatData(
+            $request,
+            'Page Found',
+            Message::MESSAGE_OK,
+            ['page' => $page],
         ));
     }
 }
