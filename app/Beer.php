@@ -47,12 +47,18 @@ class Beer extends ApiModel
             $query = $query->where('style', $style);
         }
 
+        $rating = $request->input('rating');
+        if ($rating) {
+            $query = $query->where('rating', '>=', $rating);
+        }
+
         if ($request->input('search')) {
             $search = "%{$request->input('search')}%";
 
             $query = $query->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', $search)
-                    ->orWhere('yeast', 'LIKE', $search);
+                    ->orWhere('yeast', 'LIKE', $search)
+                    ->orWhere('recipe', 'LIKE', $search);
             });
         }
 
