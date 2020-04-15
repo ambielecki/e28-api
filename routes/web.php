@@ -30,6 +30,14 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/edit/{event_id}', 'AdminEventController@postEdit');
         });
 
+        Route::group(['prefix' => '/pages'], function () {
+            Route::get('/', 'AdminPageController@getList')->name('page_list');
+            Route::get('/create', 'AdminPageController@getCreate')->name('page_create');
+            Route::post('/create', 'AdminPageController@postCreate');
+            Route::get('/edit/{page_id}', 'AdminPageController@getEdit')->name('page_edit');
+            Route::post('/edit/{page_id}', 'AdminPageController@postEdit');
+        });
+
         Route::group(['prefix' => '/groups'], function () {
             Route::get('/', 'AdminGroupController@getList')->name('group_list');
             Route::get('/create', 'AdminGroupController@getCreate')->name('group_create');

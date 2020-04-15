@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Page extends Model
 {
+    protected $guarded = [];
+
     const APP_BEER = 'beer';
     const APPS = [
         self::APP_BEER,
