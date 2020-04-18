@@ -228,4 +228,5 @@ return [
 
     ],
 
+    'default_password' => env('DEFAULT_PASSWORD', 'Ch@ng3m3')
 ];
