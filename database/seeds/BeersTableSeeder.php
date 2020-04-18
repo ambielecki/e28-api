@@ -22,6 +22,7 @@ class BeersTableSeeder extends Seeder
             $beer->is_public = random_int(0, 1);
             $beer->recipe = $faker->paragraphs(3, true);
             $beer->brew_notes = $faker->paragraphs(3, true);
+            $beer->rating = random_int(1, 5);
             $beer->primary_fermentation_start = $faker->dateTimeThisYear()->format('Y-m-d h:i');
 
             $beer->save();
@@ -36,7 +37,7 @@ class BeersTableSeeder extends Seeder
             $beer->recipe = $faker->paragraphs(3, true);
             $beer->brew_notes = $faker->paragraphs(3, true);
             $beer->primary_fermentation_start = $faker->dateTimeThisYear()->format('Y-m-d h:i');
-
+            $beer->rating = random_int(1, 5);
             $beer->save();
         }
     }
