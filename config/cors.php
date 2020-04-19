@@ -20,7 +20,8 @@ return [
         'allow_credentials' => false,
 
         'allow_origins' => [
-            '*',
+            '*.andrewbielecki.com',
+            'http://e28p2.test',
         ],
 
         'allow_methods' => [
