@@ -22,6 +22,7 @@ return [
         'allow_origins' => [
             '*.andrewbielecki.com',
             'http://e28p2.test',
+            'http://e28p3.test',
         ],
 
         'allow_methods' => [
