@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Library\JsonResponseData;
 use App\Library\Message;
 use App\User;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 
 class ApiAuthController extends Controller
 {
-    public function postRegister(Request $request): JsonResponse
+    public function postRegister(UserRequest $request): JsonResponse
     {
         $user = User::create([
             'first_name' => $request->first_name,
