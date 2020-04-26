@@ -14,12 +14,12 @@ Route::group(['middleware' => ['auth:api']], function () {
 });
 
 Route::group(['prefix' => 'beer'], function () {
-    Route::get('/', 'ApiBeerController@getList');
     Route::get('/styles', 'ApiBeerController@getStyles');
     Route::get('/home', 'ApiBeerController@getHomePage');
-    Route::get('/{id}', 'ApiBeerController@getBeer');
     Route::group(['middleware' => ['auth:api']], function () {
+        Route::get('/', 'ApiBeerController@getList');
         Route::post('/', 'ApiBeerController@postBeer');
+        Route::get('/{id}', 'ApiBeerController@getBeer');
         Route::put('/{id}', 'ApiBeerController@updateBeer');
         Route::delete('/{id}', 'ApiBeerController@deleteBeer');
     });

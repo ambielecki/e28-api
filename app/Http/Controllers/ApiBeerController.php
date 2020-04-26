@@ -59,8 +59,7 @@ class ApiBeerController extends Controller
                 Log::warning($exception);
             }
 
-//            if ($beer->is_public || ($user && $user->id === $beer->user_id)) {
-            if (true) {
+            if (($user && $user->id === $beer->user_id)) {
                 return response()->json(JsonResponseData::formatData(
                     $request,
                     '',
@@ -71,7 +70,7 @@ class ApiBeerController extends Controller
 
             return response()->json(JsonResponseData::formatData(
                 $request,
-                'This beer is not public',
+                'You are not authorized to view this beer',
                 Message::MESSAGE_WARNING,
                 [],
             ), 401);
