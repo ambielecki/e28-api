@@ -8,6 +8,7 @@ set('application', 'my_project');
 
 // Project repository
 set('repository', 'git@github.com:ambielecki/e28-api.git');
+set('branch', 'e28-p3');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
@@ -24,7 +25,7 @@ set('keep_releases', 3);
 host('andrewbielecki.com')
     ->user('ambielecki')
     ->stage('production')
-    ->set('deploy_path', '/var/www/html/e28-api');
+    ->set('deploy_path', '/var/www/html/e28-api-2');
 
 
 // Tasks
