@@ -8,6 +8,7 @@ use App\Library\Message;
 use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use JWTAuth;
 
 class ApiAuthController extends Controller
 {
