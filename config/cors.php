@@ -23,6 +23,7 @@ return [
             '*.andrewbielecki.com',
             'http://e28p2.test',
             'http://e28p3.test',
+            'https://elastic-varahamihira-09e4e1.netlify.app/',
         ],
 
         'allow_methods' => [
