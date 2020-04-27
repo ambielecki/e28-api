@@ -89,7 +89,7 @@ class ApiBeerController extends Controller
 
         if ($beer) {
             if ($beer->user_id === \Auth::user()->id) {
-                $beer->fill($request->all());
+                $beer->fill($request->except('is_expanded'));
                 try {
                     $beer->save();
                 } catch (Exception $exception) {
