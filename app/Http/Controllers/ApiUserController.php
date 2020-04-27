@@ -26,7 +26,7 @@ class ApiUserController extends Controller
         $user = JWTAuth::getToken() ? JWTAuth::parseToken()->toUser() : null;
 
         if ($user) {
-            if (Hash::check($request->input('old_password'), $user->password)) {
+            if (Hash::check($request->input('current_password'), $user->password)) {
                 $user->password = Hash::make($request->input('new_password'));
                 try {
                     $user->save();

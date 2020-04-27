@@ -11,6 +11,7 @@ Route::post('/refresh', 'ApiAuthController@postRefresh');
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/user', 'ApiUserController@getUser');
+    Route::post('/password', 'ApiUserController@postResetPassword');
 });
 
 Route::group(['prefix' => 'beer'], function () {
