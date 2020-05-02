@@ -6,12 +6,12 @@ Route::any('/echo', 'ApiTestController@echo');
 Route::get('/home', 'ApiHomeController@getHome');
 Route::post('/register', 'ApiAuthController@postRegister');
 Route::post('/login', 'ApiAuthController@postLogin');
-Route::post('/logout', 'ApiAuthController@postLogout');
 Route::post('/refresh', 'ApiAuthController@postRefresh');
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/user', 'ApiUserController@getUser');
     Route::post('/password', 'ApiUserController@postResetPassword');
+    Route::post('/logout', 'ApiAuthController@postLogout');
 });
 
 Route::group(['prefix' => 'beer'], function () {
