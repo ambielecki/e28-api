@@ -24,7 +24,7 @@ return [
             'http://e28p2.test',
             'http://e28p3.test',
             'https://elastic-varahamihira-09e4e1.netlify.app',
-            'http://localhost:8080',
+            'http://localhost:*',
         ],
 
         'allow_methods' => [
