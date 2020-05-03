@@ -26,7 +26,7 @@ class ApiUserController extends Controller
         $user = JWTAuth::getToken() ? JWTAuth::parseToken()->toUser() : null;
 
         if ($user) {
-            if ($user->email === 'testy@test.com') {
+            if ($user->email === 'testy@test.com' || $user->email === 'automation@test.com') {
                 return response()->json(JsonResponseData::formatData(
                     $request,
                     'Do not mess with my test user :)',
