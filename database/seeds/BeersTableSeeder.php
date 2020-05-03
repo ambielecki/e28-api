@@ -67,5 +67,16 @@ class BeersTableSeeder extends Seeder
             $beer->rating = random_int(1, 5);
             $beer->save();
         }
+
+        $beer = new Beer();
+        $beer->user_id = 3;
+        $beer->name = "Automation Search Test Beer";
+        $beer->style = Beer::STYLE_BOCK;
+        $beer->is_public = random_int(0, 1);
+        $beer->recipe = $faker->paragraphs(3, true);
+        $beer->brew_notes = $faker->paragraphs(3, true);
+        $beer->primary_fermentation_start = $faker->dateTimeThisYear()->format('Y-m-d h:i');
+        $beer->rating = random_int(1, 5);
+        $beer->save();
     }
 }
