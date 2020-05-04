@@ -26,6 +26,7 @@
                                             <th>Last Name</th>
                                             <th>Email</th>
                                             <th>Admin</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -36,6 +37,18 @@
                                                 <td>{{ $user->last_name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->is_admin ? 'Admin' : '' }}</td>
+                                                <td>
+                                                    <a href="{{ route('user_edit', $user->id) }}">
+                                                        <button type="submit" class="btn btn-primary">
+                                                            Edit User
+                                                        </button>
+                                                    </a>
+                                                    <a href="{{ route('user_delete', $user->id) }}">
+                                                        <button type="submit" class="btn btn-primary">
+                                                            Delete User
+                                                        </button>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

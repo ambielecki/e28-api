@@ -18,6 +18,7 @@
                                             <th>ID</th>
                                             <th>App</th>
                                             <th>Page</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -26,6 +27,18 @@
                                                 <td><a href="{{ route('page_edit', $page->id) }}">{{ $page->id }}</a> </td>
                                                 <td>{{ $page->app }}</td>
                                                 <td>{{ $page->page }}</td>
+                                                <td>
+                                                    <a href="{{ route('page_edit', $page->id) }}">
+                                                        <button type="submit" class="btn btn-primary">
+                                                            Edit Page
+                                                        </button>
+                                                    </a>
+                                                    <a href="{{ route('page_delete', $page->id) }}">
+                                                        <button type="submit" class="btn btn-primary">
+                                                            Delete Page
+                                                        </button>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

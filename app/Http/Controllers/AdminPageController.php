@@ -60,4 +60,26 @@ class AdminPageController extends Controller
 
         return back()->withInput();
     }
+
+    public function getDelete(Request $request, $page_id): View {
+        $page = Page::find($page_id);
+
+        return view('admin.pages.delete', [
+            'page' => $page,
+        ]);
+    }
+
+    public function postDelete(Request $request, $page_id): RedirectResponse {
+        $page = Page::find($page_id);
+
+        if ($page->delete()) {
+            Session::flash('flash_success', "Page Deleted");
+
+            return redirect()->route('page_list');
+        }
+
+        Session::flash('flash_warning', "There was a problem deleting this page");
+
+        return back()->withInput();
+    }
 }

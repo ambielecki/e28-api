@@ -18,6 +18,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/password', 'AdminUserController@postPassword');
             Route::get('/edit/{user_id}', 'AdminUserController@getEdit')->name('user_edit');
             Route::post('/edit/{user_id}', 'AdminUserController@postEdit');
+            Route::get('/delete/{user_id}', 'AdminUserController@getDelete')->name('user_delete');
+            Route::post('/delete/{user_id}', 'AdminUserController@postDelete');
 
             Route::get('/ajax-list', 'AdminUserController@getAjaxList');
         });
@@ -36,6 +38,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/create', 'AdminPageController@postCreate');
             Route::get('/edit/{page_id}', 'AdminPageController@getEdit')->name('page_edit');
             Route::post('/edit/{page_id}', 'AdminPageController@postEdit');
+            Route::get('/delete/{page_id}', 'AdminPageController@getDelete')->name('page_delete');
+            Route::post('/delete/{page_id}', 'AdminPageController@postDelete');
         });
 
         Route::group(['prefix' => '/groups'], function () {

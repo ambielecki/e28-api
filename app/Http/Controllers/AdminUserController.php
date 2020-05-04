@@ -54,6 +54,28 @@ class AdminUserController extends Controller
         return back()->withInput();
     }
 
+    public function getDelete(Request $request, $user_id): View {
+        $user = User::find($user_id);
+
+        return view('admin.users.delete', [
+            'user' => $user
+        ]);
+    }
+
+    public function postDelete(Request $request, $user_id): RedirectResponse {
+        $user = User::find($user_id);
+
+        if ($user->delete()) {
+            Session::flash('flash_success', "User Deleted");
+
+            return redirect()->route('user_list');
+        }
+
+        Session::flash('flash_warning', "There was a problem deleting this user");
+
+        return back()->withInput();
+    }
+
     public function getPassword(): View {
         return view('admin.users.password');
     }
